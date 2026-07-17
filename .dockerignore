@@ -1,0 +1,10 @@
+.pytest_cache
+.venv
+.vscode
+.git
+.gitignore
+__pycache__
+*.pyc
+output
+*.log
+.ipynb_checkpoints
