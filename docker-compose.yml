@@ -1,0 +1,8 @@
+services:
+  clinical-trials:
+    build: .
+    container_name: clinical-trials-app
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: python scripts/run_pipeline.py

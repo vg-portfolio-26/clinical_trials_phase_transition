@@ -1,0 +1,160 @@
+2026-07-16 18:28:31,825 | INFO | ================================================================================
+2026-07-16 18:28:31,826 | INFO | Starting pipeline
+2026-07-16 18:28:31,827 | INFO | ================================================================================
+2026-07-16 18:28:31,828 | INFO | Loading datasets from Hugging Face...
+2026-07-16 18:28:31,829 | INFO | Loading table: studies
+2026-07-16 18:28:39,019 | INFO | Table saved: /app/output/01_raw_data/studies.csv
+2026-07-16 18:28:39,020 | INFO | Loading table: interventions
+2026-07-16 18:28:47,243 | INFO | Table saved: /app/output/01_raw_data/interventions.csv
+2026-07-16 18:28:47,244 | INFO | Loading table: browse
+2026-07-16 18:29:13,892 | INFO | Table saved: /app/output/01_raw_data/browse.csv
+2026-07-16 18:29:13,896 | INFO | Data loaded and CSV files saved successfully!
+2026-07-16 18:29:13,900 | INFO | ================================================================================
+2026-07-16 18:29:13,901 | INFO | Validating ctgov tables...
+2026-07-16 18:29:13,905 | INFO | studies: (583450, 14)
+2026-07-16 18:29:13,906 | INFO | interventions: (986312, 3)
+2026-07-16 18:29:13,907 | INFO | browse: (4242245, 3)
+2026-07-16 18:29:13,908 | INFO | ctgov tables validation successful!
+2026-07-16 18:29:13,909 | INFO | ================================================================================
+2026-07-16 18:29:13,910 | INFO | Downloading NLM MeSH descriptors...
+2026-07-16 18:29:14,177 | INFO | NLM MeSH descriptors successfully downloaded
+2026-07-16 18:29:14,178 | INFO | Building MeSH mapping table...
+2026-07-16 18:29:29,863 | INFO | MeSH mapping table created!
+2026-07-16 18:29:29,863 | INFO | ================================================================================
+2026-07-16 18:29:29,891 | INFO | Validating NLM MeSH mapping table...
+2026-07-16 18:29:29,891 | INFO | NLM MeSH map: (297924, 6)
+2026-07-16 18:29:29,892 | INFO | NLM MeSH mapping table validation successful!
+2026-07-16 18:29:29,892 | INFO | ================================================================================
+2026-07-16 18:29:29,893 | INFO | Loading rxnorm vocabulary...
+2026-07-16 18:29:29,910 | INFO | rxnorm vocabulary: (9606, 3)
+2026-07-16 18:29:29,910 | INFO | rxnorm vocabulary loaded and validated successfully!
+2026-07-16 18:29:29,910 | INFO | ================================================================================
+2026-07-16 18:29:29,911 | INFO | ================================================================================
+2026-07-16 18:29:29,911 | INFO | Preprocessing studies table...
+2026-07-16 18:29:29,911 | INFO | Initial rows: 583450
+2026-07-16 18:29:49,204 | INFO | Rows after dropping duplicates: 583450 rows (-0.00% step, -0.00% total)
+2026-07-16 18:29:49,289 | INFO | Study type filter: 445223 rows (-23.69% step, -23.69% total)
+2026-07-16 18:29:49,350 | INFO | Status filter: 293400 rows (-34.10% step, -49.71% total)
+2026-07-16 18:29:49,385 | INFO | Phase filter: 126147 rows (-57.01% step, -78.38% total)
+2026-07-16 18:29:49,434 | INFO | Temporal cohort filter (2000-2025): 120674 rows (-4.34% step, -79.32% total)
+2026-07-16 18:29:49,470 | INFO | Completion audit:
+2026-07-16 18:29:49,471 | INFO | overall_status = completed: 97,712
+2026-07-16 18:29:49,471 | INFO | completed_with_evidence = True: 97,136
+2026-07-16 18:29:49,472 | INFO | excluded (no completion evidence): 576 (0.6% of completed studies)
+2026-07-16 18:29:49,472 | INFO | Final dataset: 120674 rows (-79.32% total loss)
+2026-07-16 18:29:51,696 | INFO | Studies preprocessed successfully!
+2026-07-16 18:29:51,696 | INFO | ================================================================================
+2026-07-16 18:29:51,698 | INFO | Preprocessing rxnorm vocabulary...
+2026-07-16 18:29:51,698 | INFO | Initial rows: 9606
+2026-07-16 18:29:51,843 | INFO | Rows after dropping duplicates: 9606 rows (-0.00% step, -0.00% total)
+2026-07-16 18:29:51,875 | INFO | rxnorm vocabulary preprocessed successfully!
+2026-07-16 18:29:51,876 | INFO | ================================================================================
+2026-07-16 18:29:51,876 | INFO | Preprocessing interventions table...
+2026-07-16 18:29:51,877 | INFO | Initial rows: 986312
+2026-07-16 18:30:17,270 | INFO | Rows after dropping duplicates: 968204 rows (-1.84% step, -1.84% total)
+2026-07-16 18:30:17,340 | INFO | Rows after filtering for intervention_type = drug: 391480 rows (-59.57% step, -60.31% total)
+2026-07-16 18:30:17,458 | INFO | Rows after filtering for numeric drug names: 391446 rows (-0.01% step, -60.31% total)
+2026-07-16 18:30:17,780 | INFO | Rows after filtering for non drug names: 346931 rows (-11.37% step, -64.83% total)
+2026-07-16 18:30:18,118 | INFO | Rows after filtering for non-deterministic drug names: 317272 rows (-8.55% step, -67.83% total)
+2026-07-16 18:30:18,119 | INFO | Intervention table shape: (317272, 3)
+2026-07-16 18:30:18,528 | INFO | Adding rxnorm info via exact match...
+2026-07-16 18:30:18,654 | INFO | Number of drug names with exact matched rxcui value: 147055 (46.35%)
+2026-07-16 18:30:18,666 | INFO | Adding rxnorm info via RapidFuzz...
+2026-07-16 18:37:24,991 | INFO | Final number of drug names with rxcui value: 204289 (64.39%)
+2026-07-16 18:37:25,009 | INFO | Final intervention table after removing rxcui NA values: (204289, 8)
+2026-07-16 18:37:25,914 | INFO | interventions preprocessed successfully!
+2026-07-16 18:37:25,914 | INFO | ================================================================================
+2026-07-16 18:37:25,926 | INFO | Preprocessing browse table...
+2026-07-16 18:37:25,927 | INFO | Initial rows: 4242245
+2026-07-16 18:38:35,194 | INFO | Rows after dropping duplicates: 4242245 rows (-0.00% step, -0.00% total)
+2026-07-16 18:38:44,694 | INFO | Browse preprocessed successfully!
+2026-07-16 18:38:44,694 | INFO | ================================================================================
+2026-07-16 18:38:44,695 | INFO | Building canonical MeSH mapping table...
+2026-07-16 18:38:45,433 | INFO | Initial rows: 297,924
+2026-07-16 18:38:45,434 | INFO | Rows after dropping duplicates: 266814 rows (-10.44% step, -10.44% total)
+2026-07-16 18:38:45,435 | INFO | Initial unique terms: 266,814
+2026-07-16 18:38:45,436 | INFO | Final unique terms: 266,814
+2026-07-16 18:38:47,280 | INFO | Canonical MeSH mapping table created!
+2026-07-16 18:38:47,280 | INFO | ================================================================================
+2026-07-16 18:38:47,298 | INFO | Preprocessing MeSH map table...
+2026-07-16 18:38:47,306 | INFO | Initial rows: 266814
+2026-07-16 18:38:51,434 | INFO | Rows after dropping duplicates: 266814 rows (-0.00% step, -0.00% total)
+2026-07-16 18:38:53,450 | INFO | MeSH map table preprocessed successfully!
+2026-07-16 18:38:53,451 | INFO | ================================================================================
+2026-07-16 18:38:53,451 | INFO | Adding MeSH tree data to browse terms...
+2026-07-16 18:38:53,546 | INFO | Initial browse table shape: (4242245, 3)
+2026-07-16 18:38:55,048 | INFO | Rows after dropping missing mesh_id: 4226633 rows (-0.37% step, -0.37% total)
+2026-07-16 18:39:29,622 | INFO | Rows after dropping mesh-ancestors duplicates: 803215 rows (-81.00% step, -81.07% total)
+2026-07-16 18:39:30,258 | INFO | Final browse table shape: (803215, 8)
+2026-07-16 18:39:30,259 | INFO | Unique browse terms with MeSH tree data: 4,636 (76.96% coverage)
+2026-07-16 18:39:30,260 | INFO | Unique studies with MeSH tree data: 459,662 (99.68% coverage)
+2026-07-16 18:39:38,711 | INFO | MeSH tree data added successfully to browse terms!
+2026-07-16 18:39:38,712 | INFO | ================================================================================
+2026-07-16 18:39:38,842 | INFO | ================================================================================
+2026-07-16 18:39:38,901 | INFO | Building study-level master dataset...
+2026-07-16 18:39:38,980 | INFO | studies table: (120674, 18)
+2026-07-16 18:39:39,148 | INFO | after merging interventions: (155999, 25)
+2026-07-16 18:39:39,606 | INFO | after merging browse: (268609, 32)
+2026-07-16 18:39:39,841 | INFO | after dropping NAs (nct_id): (268609, 32) (-0.00%)
+2026-07-16 18:39:39,914 | INFO | after dropping NAs (phase): (268609, 32) (-0.00%)
+2026-07-16 18:39:39,989 | INFO | after dropping NAs (mesh_id): (240380, 32) (-10.51%)
+2026-07-16 18:39:40,083 | INFO | after dropping NAs (drug_name): (152256, 32) (-36.66%)
+2026-07-16 18:39:44,607 | INFO | Study-level master dataset created!
+2026-07-16 18:39:44,608 | INFO | ================================================================================
+2026-07-16 18:39:44,609 | INFO | Building program-level master dataset...
+2026-07-16 18:39:44,879 | INFO | Final program-level master dataset table: (67346, 12)
+2026-07-16 18:39:45,574 | INFO | Program-level dataset created!
+2026-07-16 18:39:45,574 | INFO | ================================================================================
+2026-07-16 18:39:45,597 | INFO | Computing empirical max_gap (p90, per-phase) from observed escalation gaps...
+2026-07-16 18:40:37,744 | INFO |   [phase1] p90 = 2861d (7.83 yr) | median = 872d | max = 8471d | n = 3,903
+2026-07-16 18:40:37,745 | INFO |   [phase1/phase2] p90 = 2987d (8.18 yr) | median = 840d | max = 7700d | n = 1,941
+2026-07-16 18:40:37,747 | INFO |   [phase2] p90 = 3622d (9.92 yr) | median = 1136d | max = 8392d | n = 3,463
+2026-07-16 18:40:37,748 | INFO |   [phase2/phase3] p90 = 3314d (9.07 yr) | median = 986d | max = 8216d | n = 421
+2026-07-16 18:40:37,750 | INFO | Overall gap distribution (n = 9,728): p25 = 377d  median = 959d  p90 = 3198d  p99 = 5996d  max = 8471d
+2026-07-16 18:40:37,751 | INFO | ================================================================================
+2026-07-16 18:40:37,757 | INFO | Building survival dataset...
+2026-07-16 18:41:24,820 | INFO | Survival dataset built: n = 51,209  events = 8,580 (16.8%)  censored = 42,629 (83.2%)
+2026-07-16 18:41:25,199 | INFO | ================================================================================
+2026-07-16 18:41:25,212 | INFO | ================================================================================
+2026-07-16 18:41:25,214 | INFO | Fitting Kaplan-Meier curves per phase...
+2026-07-16 18:41:25,240 | INFO |   [phase1] n = 15,311  events = 3,441  median time-to-progress = not reached  S(5yr) = 0.785  S(10yr) = 0.737
+2026-07-16 18:41:25,250 | INFO |   [phase1/phase2] n = 7,875  events = 1,689  median time-to-progress = not reached  S(5yr) = 0.803  S(10yr) = 0.749
+2026-07-16 18:41:25,262 | INFO |   [phase2] n = 24,239  events = 3,076  median time-to-progress = not reached  S(5yr) = 0.896  S(10yr) = 0.850
+2026-07-16 18:41:25,269 | INFO |   [phase2/phase3] n = 3,784  events = 374  median time-to-progress = not reached  S(5yr) = 0.912  S(10yr) = 0.884
+2026-07-16 18:41:25,270 | INFO | ================================================================================
+2026-07-16 18:41:25,271 | INFO | Fitting Kaplan-Meier curves per phase - disease tree group (min_events = 10)...
+2026-07-16 18:41:25,621 | INFO | Tree-level KM curves fit: 69 strata  (skipped 32 strata below min_events; phase-level fallback applies)
+2026-07-16 18:41:25,622 | INFO | ================================================================================
+2026-07-16 18:41:25,626 | INFO | Computing per-program KM progression probabilities...
+2026-07-16 18:41:50,818 | INFO | km_progression_prob assigned — mean = 0.151, median = 0.142
+2026-07-16 18:41:51,322 | INFO | ================================================================================
+2026-07-16 18:41:51,324 | INFO | Survival dataset diagnostics...
+2026-07-16 18:41:51,344 | INFO |   [phase1] n = 15,311  events = 3,441 (22.5%)  median_followup = 2678d  mean_km_prob = 0.197
+2026-07-16 18:41:51,346 | INFO |   [phase1/phase2] n = 7,875  events = 1,689 (21.4%)  median_followup = 2648d  mean_km_prob = 0.191
+2026-07-16 18:41:51,352 | INFO |   [phase2] n = 24,239  events = 3,076 (12.7%)  median_followup = 3897d  mean_km_prob = 0.118
+2026-07-16 18:41:51,356 | INFO |   [phase2/phase3] n = 3,784  events = 374 (9.9%)  median_followup = 3531d  mean_km_prob = 0.096
+2026-07-16 18:41:51,358 | INFO | ================================================================================
+2026-07-16 18:41:51,360 | INFO | Computing EB priors on phase level...
+2026-07-16 18:41:51,376 | INFO |   [phase1] mean = 19.68%  strength = 38.0  n_programs = 15,311
+2026-07-16 18:41:51,381 | INFO |   [phase1/phase2] mean = 19.15%  strength = 34.9  n_programs = 7,875
+2026-07-16 18:41:51,390 | INFO |   [phase2] mean = 11.80%  strength = 71.2  n_programs = 24,239
+2026-07-16 18:41:51,393 | INFO |   [phase2/phase3] mean = 9.64%  strength = 82.5  n_programs = 3,784
+2026-07-16 18:41:51,393 | INFO | ================================================================================
+2026-07-16 18:41:51,395 | INFO | Shrinking on program (pair) level...
+2026-07-16 18:41:52,406 | INFO | Strategic profile: {'STANDARD': 33816, 'EMERGING_SIGNAL': 12366, 'STABLE_BUT_MODEST': 2552, 'HIGH_CONFIDENCE': 2413, 'HIGH_RISK_HIGH_REWARD': 62}
+2026-07-16 18:41:53,359 | INFO | ================================================================================
+2026-07-16 18:41:53,359 | INFO | Shrinking on tree level...
+2026-07-16 18:41:53,397 | INFO | Strategic profile: {'STANDARD': 56, 'STABLE_BUT_MODEST': 19, 'HIGH_RISK_HIGH_REWARD': 18, 'HIGH_CONFIDENCE': 7, 'EMERGING_SIGNAL': 1}
+2026-07-16 18:41:53,409 | INFO | ================================================================================
+2026-07-16 18:41:53,409 | INFO | ================================================================================
+2026-07-16 18:41:53,410 | INFO | Plotting phase cumulative progression probability...
+2026-07-16 18:41:53,602 | INFO | Km curves plot saved!
+2026-07-16 18:41:53,603 | INFO | Plotting disease opportunity map...
+2026-07-16 18:41:54,524 | INFO | Disease opportunity map saved!
+2026-07-16 18:41:54,534 | INFO | Plotting top programs...
+2026-07-16 18:41:55,722 | INFO | Top programs plot saved!
+2026-07-16 18:41:55,726 | INFO | ================================================================================
+2026-07-16 18:41:59,236 | INFO | Metadata successfully written!
+2026-07-16 18:41:59,236 | INFO | ================================================================================
+2026-07-16 18:41:59,237 | INFO | Pipeline completed successfully!
+2026-07-16 18:41:59,238 | INFO | ================================================================================
